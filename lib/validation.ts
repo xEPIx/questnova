@@ -1,5 +1,6 @@
 import { Game } from "./games";
-import { contentManifest, GameContent } from "./content/manifest";
+import { contentManifest } from "./content/manifest";
+import { GameContent } from "./content/schema";
 
 export function validateGame(game: Game): string[] {
   const errors: string[] = [];
