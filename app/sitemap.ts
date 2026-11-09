@@ -1,6 +1,8 @@
 import type { MetadataRoute } from "next";
 import { games } from "@/lib/games";
 
+export const dynamic = "force-static";
+
 export default function sitemap(): MetadataRoute.Sitemap {
   const base = "https://questnova.pages.dev";
   return [
