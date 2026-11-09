@@ -1,4 +1,4 @@
-import { GameContent } from "./schema";
+import { GameContent, ContentPage } from "./schema";
 
 export const contentManifest: GameContent[] = [
   { slug: "blox-fruits", name: "Blox Fruits", description: "Codes, values and tools for Blox Fruits.", source: "official", lastVerified: "2026-11-09", pages: ["codes", "guide", "values"], featured: true, trending: true, tags: ["roblox", "codes", "values"] },
