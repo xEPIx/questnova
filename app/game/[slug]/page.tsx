@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getGame, games, getAvailablePages } from "@/lib/games";
+import { getGame, games, getAvailablePages, getVerifiedGames } from "@/lib/games";
 import { getCodes } from "@/lib/content/codes";
 import { JsonLd, gameJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -12,7 +12,7 @@ import FAQ from "@/components/FAQ";
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return games.map((g) => ({ slug: g.slug }));
+  return games.filter((g) => getVerifiedGames().some((v) => v.slug === g.slug)).map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

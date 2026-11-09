@@ -40,4 +40,4 @@ export function searchGames(query: string): Game[] {
   );
 }
 
-export { getContent, getAvailablePages } from "@/lib/content/manifest";
+export { getContent, getAvailablePages, getVerifiedGames } from "@/lib/content/manifest";
