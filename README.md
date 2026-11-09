@@ -1,24 +1,23 @@
-QuestNova
-Automated gaming portal with game codes, calculators, guides, trackers and SEO-driven content generation.
+# QuestNova
 
-Mission: Build a highly automated gaming platform capable of generating, updating and publishing useful game resources with minimal human interaction.
+Automated gaming utility platform. Next.js 15 + TypeScript + Tailwind, deployed on Cloudflare Pages.
 
-Primary Goal: Organic search traffic.
+## Development
+npm install
+npm run dev
 
-Revenue: Display ads.
+## Build
+npm run build
+npm run lint
 
-Target: 100,000+ indexable pages.
+## Cloudflare Pages Deployment
+- Build command: `npm run build`
+- Output directory: `.next`
+- Node version: 20
+- For Pages Functions support use `@cloudflare/next-on-pages`: `npm run pages:build`
 
-Hosting: Cloudflare Pages.
+## Environment
+Copy `.env.example` to `.env.local`.
 
-Database: Supabase.
-
-Automation: GitHub Actions.
-
-Priority:
-
-SEO
-Automation
-Scale
-User Experience
-Design
+## Phase Status
+Phase 2 complete: Cloudflare-compatible config, sample dataset, SEO JSON-LD, codes/guide routes. Ready for Phase 3.
