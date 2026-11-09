@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { getGame, games } from "@/lib/games";
+import { getGame, games, getAvailablePages } from "@/lib/games";
 import { getCodes } from "@/lib/content/codes";
 import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -9,7 +9,9 @@ import RelatedLinks from "@/components/RelatedLinks";
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return games.map((g) => ({ slug: g.slug }));
+  return games
+    .filter((g) => getAvailablePages(g.slug).includes("codes"))
+    .map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

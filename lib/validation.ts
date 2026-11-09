@@ -39,3 +39,36 @@ export function validateContent(content: GameContent[]): { valid: boolean; error
 export function validateManifest() {
   return validateContent(contentManifest);
 }
+
+export function validateFreshness(content: GameContent[], maxDays = 30): string[] {
+  const errors: string[] = [];
+  const now = Date.now();
+  for (const c of content) {
+    const verified = new Date(c.lastVerified).getTime();
+    if (Number.isNaN(verified)) {
+      errors.push(`invalid lastVerified: ${c.slug}`);
+      continue;
+    }
+    const ageDays = (now - verified) / (1000 * 60 * 60 * 24);
+    if (ageDays > maxDays) errors.push(`stale content: ${c.slug}`);
+  }
+  return errors;
+}
+
+export function validatePageContent(content: GameContent): string[] {
+  const errors: string[] = [];
+  // basic: declared pages must be valid names
+  const validPages = ["codes", "guide", "values"];
+  for (const p of content.pages) {
+    if (!validPages.includes(p)) errors.push(`unknown page: ${content.slug}/${p}`);
+  }
+  return errors;
+}
+
+export function runQualityGates() {
+  const errors: string[] = [];
+  errors.push(...validateContent(contentManifest).errors);
+  errors.push(...validateFreshness(contentManifest));
+  for (const c of contentManifest) errors.push(...validatePageContent(c));
+  return { valid: errors.length === 0, errors };
+}

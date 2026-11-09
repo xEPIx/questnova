@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getGame, games } from "@/lib/games";
+import { getGame, games, getAvailablePages } from "@/lib/games";
 import { getCodes } from "@/lib/content/codes";
 import { JsonLd, gameJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -46,9 +46,9 @@ export default async function GamePage({ params }: Props) {
         <p className="text-muted">{game.description}</p>
       </div>
       <div className="flex gap-2 mb-6">
-        <Link href={`/game/${game.slug}/codes`} className="btn-primary">Codes</Link>
-        <Link href={`/game/${game.slug}/guide`} className="btn">Guide</Link>
-        <Link href={`/game/${game.slug}/values`} className="btn">Values</Link>
+        {getAvailablePages(game.slug).includes("codes") && <Link href={`/game/${game.slug}/codes`} className="btn-primary">Codes</Link>}
+        {getAvailablePages(game.slug).includes("guide") && <Link href={`/game/${game.slug}/guide`} className="btn">Guide</Link>}
+        {getAvailablePages(game.slug).includes("values") && <Link href={`/game/${game.slug}/values`} className="btn">Values</Link>}
       </div>
       <FAQ items={faqItems} />
       <RelatedLinks slug={game.slug} />
