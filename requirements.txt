@@ -1,8 +1,0 @@
-# Core Dependencies (From Phase 1 & 2)
-customtkinter
-sqlite3 # Standard library, but good practice for listing database requirements
-pandas # For data manipulation and analysis in later phases
-
-# External API Clients/Libraries (To be added later)
-requests # For REST API calls (Binance, LM Studio fallback)
-python-dotenv # For secure credential handling
