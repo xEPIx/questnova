@@ -7,14 +7,15 @@ import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedLinks from "@/components/RelatedLinks";
 import FAQ from "@/components/FAQ";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return games.map((g) => ({ slug: g.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const game = getGame(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const game = getGame(slug);
   if (!game) return {};
   return {
     title: `${game.name} | QuestNova`,
@@ -24,8 +25,9 @@ export function generateMetadata({ params }: Props): Metadata {
   };
 }
 
-export default function GamePage({ params }: Props) {
-  const game = getGame(params.slug);
+export default async function GamePage({ params }: Props) {
+  const { slug } = await params;
+  const game = getGame(slug);
   if (!game) notFound();
   const crumbs = [
     { name: "Home", url: "https://questnova.pages.dev/" },

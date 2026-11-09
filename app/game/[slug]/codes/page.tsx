@@ -6,22 +6,24 @@ import { JsonLd, breadcrumbJsonLd } from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedLinks from "@/components/RelatedLinks";
 
-type Props = { params: { slug: string } };
+type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
   return games.map((g) => ({ slug: g.slug }));
 }
 
-export function generateMetadata({ params }: Props): Metadata {
-  const game = getGame(params.slug);
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const game = getGame(slug);
   if (!game) return {};
   return { title: `${game.name} Codes (Updated Daily) | QuestNova`, description: `Latest ${game.name} codes.` };
 }
 
-export default function CodesPage({ params }: Props) {
-  const game = getGame(params.slug);
+export default async function CodesPage({ params }: Props) {
+  const { slug } = await params;
+  const game = getGame(slug);
   if (!game) notFound();
-  const data = getCodes(params.slug);
+  const data = getCodes(slug);
   const crumbs = [
     { name: "Home", url: "https://questnova.pages.dev/" },
     { name: game.name, url: `https://questnova.pages.dev/game/${game.slug}` },
