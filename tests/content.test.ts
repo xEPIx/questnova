@@ -19,18 +19,10 @@ test("page content validation accepts known pages", () => {
   }
 });
 
-// synthetic cases
-test("invalid date detected", () => {
-  const errs = validateFreshness([{ ...contentManifest[0], lastVerified: "not-a-date" } as any], 30);
-  assert.ok(errs.some((e) => e.includes("invalid lastVerified")));
-});
-
 test("future date detected", () => {
   const future = new Date(Date.now() + 86400000).toISOString().slice(0, 10);
   const errs = validateFreshness([{ ...contentManifest[0], lastVerified: future } as any], 30);
-  // future date age is negative, not > 30, so not stale; but we want detect future
-  // add explicit check
-  assert.ok(true);
+  assert.ok(errs.some((e) => e.includes("future date")));
 });
 
 test("stale content detected", () => {
@@ -39,15 +31,34 @@ test("stale content detected", () => {
   assert.ok(errs.some((e) => e.includes("stale content")));
 });
 
+test("invalid date detected", () => {
+  const errs = validateFreshness([{ ...contentManifest[0], lastVerified: "not-a-date" } as any], 30);
+  assert.ok(errs.some((e) => e.includes("invalid lastVerified")));
+});
+
 test("duplicate slug detected", () => {
   const dup = [contentManifest[0], { ...contentManifest[0] }];
   const r = validateContent(dup as any);
   assert.equal(r.valid, false);
+  assert.ok(r.errors.some((e) => e.includes("duplicate slug")));
 });
 
 test("missing source detected", () => {
   const bad = [{ ...contentManifest[0], source: "" }];
   const r = validateContent(bad as any);
-  // validateContent doesn't check source URL; check separately
-  assert.ok(true);
+  assert.equal(r.valid, false);
+  assert.ok(r.errors.some((e) => e.includes("missing source")));
+});
+
+test("malformed source URL detected", () => {
+  const bad = [{ ...contentManifest[0], source: "not-a-url" }];
+  const r = validateContent(bad as any);
+  assert.equal(r.valid, false);
+  assert.ok(r.errors.some((e) => e.includes("invalid source URL")));
+});
+
+test("invalid freshness window handling", () => {
+  // maxDays negative should still run; stale logic uses > maxDays, so all current dates stale
+  const errs = validateFreshness(contentManifest, -1);
+  assert.ok(errs.length > 0);
 });

@@ -26,4 +26,7 @@ Run `npm run content:check` to validate freshness and sources.
 Run `npm test`.
 
 ## Phase Status
-Phase 9 complete: automated content freshness monitoring.
+Phase 10 complete: CI content quality gates.
+
+## Content Quality
+Checks cover duplicate slugs, missing/invalid sources, freshness window, future dates, and page validity.
