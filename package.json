@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build && rm -rf .next/cache",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "content:check": "node --experimental-strip-types scripts/content-check.ts",
+    "test": "node --experimental-strip-types --test tests/content.test.ts"
   },
   "dependencies": {
     "next": "15.5.0",

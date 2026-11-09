@@ -19,5 +19,11 @@ npm run lint
 ## Environment
 Copy `.env.example` to `.env.local`.
 
+## Content Check
+Run `npm run content:check` to validate freshness and sources.
+
+## Tests
+Run `npm test`.
+
 ## Phase Status
-Phase 2 complete: Cloudflare-compatible config, sample dataset, SEO JSON-LD, codes/guide routes. Ready for Phase 3.
+Phase 9 complete: automated content freshness monitoring.

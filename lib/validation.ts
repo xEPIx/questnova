@@ -30,6 +30,7 @@ export function validateContent(content: GameContent[]): { valid: boolean; error
     if (slugs.has(c.slug)) errors.push(`duplicate slug: ${c.slug}`);
     slugs.add(c.slug);
     if (!c.source) errors.push(`missing source: ${c.slug}`);
+  if (c.source && !/^https?:\/\//.test(c.source)) errors.push(`invalid source URL: ${c.slug}`);
     if (!c.lastVerified) errors.push(`missing lastVerified: ${c.slug}`);
     if (!c.pages) errors.push(`missing pages: ${c.slug}`);
   }
@@ -50,7 +51,8 @@ export function validateFreshness(content: GameContent[], maxDays = 30): string[
       continue;
     }
     const ageDays = (now - verified) / (1000 * 60 * 60 * 24);
-    if (ageDays > maxDays) errors.push(`stale content: ${c.slug}`);
+    if (ageDays < 0) errors.push(`future date: ${c.slug}`);
+    else if (ageDays > maxDays) errors.push(`stale content: ${c.slug}`);
   }
   return errors;
 }
