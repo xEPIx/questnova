@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { getFeaturedGames, getTrendingGames, games } from "@/lib/games";
+import { getContent } from "@/lib/content/manifest";
 
 export const metadata: Metadata = {
   title: "Home",
