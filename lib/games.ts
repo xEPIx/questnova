@@ -1,3 +1,5 @@
+import { contentManifest, getContent } from "@/lib/content/manifest";
+
 export type Game = {
   slug: string;
   name: string;
@@ -7,14 +9,14 @@ export type Game = {
   tags?: string[];
 };
 
-export const games: Game[] = [
-  { slug: "blox-fruits", name: "Blox Fruits", description: "Codes, values and tools for Blox Fruits.", featured: true, trending: true, tags: ["roblox", "codes", "values"] },
-  { slug: "grow-a-garden", name: "Grow a Garden", description: "Codes and resources for Grow a Garden.", featured: true, trending: true, tags: ["roblox", "codes"] },
-  { slug: "anime-vanguards", name: "Anime Vanguards", description: "Codes and guides for Anime Vanguards.", featured: true, tags: ["roblox", "codes"] },
-  { slug: "blue-lock-rivals", name: "Blue Lock Rivals", description: "Codes and tools for Blue Lock Rivals.", featured: true, tags: ["roblox", "codes"] },
-  { slug: "fisch", name: "Fisch", description: "Codes and value lists for Fisch.", featured: true, trending: true, tags: ["roblox", "values"] },
-  { slug: "roblox", name: "Roblox", description: "General Roblox codes and resources.", tags: ["roblox"] },
-];
+export const games: Game[] = contentManifest.map((c) => ({
+  slug: c.slug,
+  name: c.name,
+  description: c.description,
+  featured: c.featured,
+  trending: c.trending,
+  tags: c.tags,
+}));
 
 export function getGame(slug: string): Game | undefined {
   return games.find((g) => g.slug === slug);
@@ -37,3 +39,5 @@ export function searchGames(query: string): Game[] {
     (g.tags ?? []).some((t) => t.includes(q))
   );
 }
+
+export { getContent, getAvailablePages } from "@/lib/content/manifest";
