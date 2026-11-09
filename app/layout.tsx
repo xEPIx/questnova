@@ -14,17 +14,19 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-slate-950 text-slate-100">
+      <body className="min-h-screen bg-bg text-text">
         <JsonLd data={websiteJsonLd()} />
-        <header className="border-b border-slate-800">
-          <nav className="mx-auto max-w-5xl flex gap-4 p-4">
-            <Link href="/" className="font-bold">QuestNova</Link>
-            <Link href="/games">Games</Link>
+        <header className="sticky top-0 z-50 border-b border-white/10 backdrop-blur bg-bg/80">
+          <nav className="mx-auto max-w-6xl flex items-center gap-4 p-4">
+            <Link href="/" className="font-bold text-lg">QuestNova</Link>
+            <div className="flex-1" />
+            <Link href="/games" className="text-muted hover:text-text">Games</Link>
+            <Link href="/search" className="text-muted hover:text-text">Search</Link>
           </nav>
         </header>
-        <main className="mx-auto max-w-5xl p-4">{children}</main>
-        <footer className="border-t border-slate-800 mt-8">
-          <div className="mx-auto max-w-5xl p-4 text-sm text-slate-400">© QuestNova</div>
+        <main className="mx-auto max-w-6xl p-4">{children}</main>
+        <footer className="border-t border-white/10 mt-8">
+          <div className="mx-auto max-w-6xl p-4 text-sm text-muted">© QuestNova</div>
         </footer>
       </body>
     </html>

@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { notFound } from "next/navigation";
 import { getGame, games } from "@/lib/games";
 import { getCodes } from "@/lib/content/codes";
@@ -40,9 +41,15 @@ export default async function GamePage({ params }: Props) {
       <JsonLd data={gameJsonLd(game)} />
       <JsonLd data={breadcrumbJsonLd(crumbs)} />
       <JsonLd data={faqJsonLd(faqItems)} />
-      <Breadcrumbs items={[{ name: "Home", href: "/" }, { name: game.name, href: `/game/${game.slug}` }]} />
-      <h1 className="text-2xl font-bold mb-2">{game.name}</h1>
-      <p>{game.description}</p>
+      <div className="mb-6 rounded-2xl bg-gradient-to-r from-primary/30 to-accent/30 p-6">
+        <h1 className="text-3xl font-bold mb-2">{game.name}</h1>
+        <p className="text-muted">{game.description}</p>
+      </div>
+      <div className="flex gap-2 mb-6">
+        <Link href={`/game/${game.slug}/codes`} className="btn-primary">Codes</Link>
+        <Link href={`/game/${game.slug}/guide`} className="btn">Guide</Link>
+        <Link href={`/game/${game.slug}/values`} className="btn">Values</Link>
+      </div>
       <FAQ items={faqItems} />
       <RelatedLinks slug={game.slug} />
       <RelatedGames current={game} />
