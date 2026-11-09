@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import "./globals.css";
 import { JsonLd, websiteJsonLd } from "@/components/JsonLd";
 
@@ -17,8 +18,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <JsonLd data={websiteJsonLd()} />
         <header className="border-b border-slate-800">
           <nav className="mx-auto max-w-5xl flex gap-4 p-4">
-            <a href="/" className="font-bold">QuestNova</a>
-            <a href="/games">Games</a>
+            <Link href="/" className="font-bold">QuestNova</Link>
+            <Link href="/games">Games</Link>
           </nav>
         </header>
         <main className="mx-auto max-w-5xl p-4">{children}</main>
