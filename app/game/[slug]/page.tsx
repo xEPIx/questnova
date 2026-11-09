@@ -5,6 +5,7 @@ import { getCodes } from "@/lib/content/codes";
 import { JsonLd, gameJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
 import RelatedLinks from "@/components/RelatedLinks";
+import RelatedGames from "@/components/RelatedGames";
 import FAQ from "@/components/FAQ";
 
 type Props = { params: Promise<{ slug: string }> };
@@ -44,6 +45,7 @@ export default async function GamePage({ params }: Props) {
       <p>{game.description}</p>
       <FAQ items={faqItems} />
       <RelatedLinks slug={game.slug} />
+      <RelatedGames current={game} />
     </article>
   );
 }
