@@ -26,7 +26,7 @@ Run `npm run content:check` to validate freshness and sources.
 Run `npm test`.
 
 ## Phase Status
-Phase 10 complete: CI content quality gates.
+Phase 11 complete: calculator framework (sample data, not live game data).
 
 ## Content Quality
 Checks cover duplicate slugs, missing/invalid sources, freshness window, future dates, and page validity.
