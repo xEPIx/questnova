@@ -41,6 +41,17 @@ export function validateManifest() {
   return validateContent(contentManifest);
 }
 
+export function validateVerification(content: GameContent[]): string[] {
+  const errors: string[] = [];
+  for (const c of content) {
+    if (c.verified) {
+      if (!c.source || !/^https?:\/\//.test(c.source)) errors.push(`verified without valid source: ${c.slug}`);
+      if (!c.lastVerified) errors.push(`verified without lastVerified: ${c.slug}`);
+    }
+  }
+  return errors;
+}
+
 export function validateFreshness(content: GameContent[], maxDays = 30): string[] {
   const errors: string[] = [];
   const now = Date.now();

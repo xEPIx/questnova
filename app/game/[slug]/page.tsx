@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { getGame, games, getAvailablePages } from "@/lib/games";
+import { getGame, games, getAvailablePages, getVerifiedGames } from "@/lib/games";
+import { getContent } from "@/lib/content/manifest";
 import { getCodes } from "@/lib/content/codes";
 import { JsonLd, gameJsonLd, breadcrumbJsonLd, faqJsonLd } from "@/components/JsonLd";
 import Breadcrumbs from "@/components/Breadcrumbs";
@@ -18,7 +19,8 @@ export function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const game = getGame(slug);
-  if (!game) return {};
+  const content = getContent(slug);
+  if (!game || !content?.verified) return {};
   return {
     title: `${game.name} | QuestNova`,
     description: game.description,
@@ -30,7 +32,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function GamePage({ params }: Props) {
   const { slug } = await params;
   const game = getGame(slug);
-  if (!game) notFound();
+  const content = getContent(slug);
+  if (!game || !content?.verified) notFound();
   const crumbs = [
     { name: "Home", url: "https://questnova.pages.dev/" },
     { name: game.name, url: `https://questnova.pages.dev/game/${game.slug}` },

@@ -7,6 +7,7 @@ export type GameContent = {
   source: string;
   lastVerified: string;
   pages: ContentPage[];
+  verified?: boolean;
   featured?: boolean;
   trending?: boolean;
   tags?: string[];

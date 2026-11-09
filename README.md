@@ -26,7 +26,7 @@ Run `npm run content:check` to validate freshness and sources.
 Run `npm test`.
 
 ## Phase Status
-Phase 12 in progress: reusable calculator infrastructure; no verified game-specific calculator yet (source data needed).
+Phase 16 preparation: unverified content excluded from routes/sitemaps; source-dependent work blocked pending real sources.
 
 ## Content Quality
 Checks cover duplicate slugs, missing/invalid sources, freshness window, future dates, and page validity.

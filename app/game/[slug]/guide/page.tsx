@@ -9,22 +9,20 @@ import RelatedLinks from "@/components/RelatedLinks";
 type Props = { params: Promise<{ slug: string }> };
 
 export function generateStaticParams() {
-  return games
-    .filter((g) => getAvailablePages(g.slug).includes("guide"))
-    .map((g) => ({ slug: g.slug }));
+  return games.map((g) => ({ slug: g.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const game = getGame(slug);
-  if (!game) return {};
+  if (!game || !getAvailablePages(slug).includes("guide")) return {};
   return { title: `${game.name} Beginner Guide | QuestNova`, description: `${game.name} guide.` };
 }
 
 export default async function GuidePage({ params }: Props) {
   const { slug } = await params;
   const game = getGame(slug);
-  if (!game) notFound();
+  if (!game || !getAvailablePages(slug).includes("guide")) notFound();
   const guide = getGuide(slug);
   const crumbs = [
     { name: "Home", url: "https://questnova.pages.dev/" },

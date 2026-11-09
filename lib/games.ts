@@ -23,11 +23,11 @@ export function getGame(slug: string): Game | undefined {
 }
 
 export function getFeaturedGames(): Game[] {
-  return games.filter((g) => g.featured);
+  return games.filter((g) => g.featured && getContent(g.slug)?.verified);
 }
 
 export function getTrendingGames(): Game[] {
-  return games.filter((g) => g.trending);
+  return games.filter((g) => g.trending && getContent(g.slug)?.verified);
 }
 
 export function searchGames(query: string): Game[] {
@@ -40,4 +40,4 @@ export function searchGames(query: string): Game[] {
   );
 }
 
-export { getContent, getAvailablePages } from "@/lib/content/manifest";
+export { getContent, getAvailablePages, getVerifiedGames } from "@/lib/content/manifest";
