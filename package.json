@@ -8,6 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "content:check": "tsx scripts/content-check.ts",
+    "site:health": "tsx scripts/site-health.ts",
     "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {
