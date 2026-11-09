@@ -7,8 +7,8 @@
     "build": "next build && rm -rf .next/cache",
     "start": "next start",
     "lint": "next lint",
-    "content:check": "node --experimental-strip-types scripts/content-check.ts",
-    "test": "node --experimental-strip-types --test tests/content.test.ts"
+    "content:check": "tsx scripts/content-check.ts",
+    "test": "tsx --test tests/content.test.ts"
   },
   "dependencies": {
     "next": "15.5.0",
@@ -24,6 +24,7 @@
     "eslint-config-next": "15.5.0",
     "postcss": "^8.4.0",
     "tailwindcss": "^3.4.0",
+    "tsx": "^4.19.0",
     "typescript": "^5.8.0"
   }
 }
