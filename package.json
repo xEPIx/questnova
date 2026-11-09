@@ -8,7 +8,7 @@
     "start": "next start",
     "lint": "next lint",
     "content:check": "tsx scripts/content-check.ts",
-    "test": "tsx --test tests/content.test.ts"
+    "test": "tsx --test tests/*.test.ts"
   },
   "dependencies": {
     "next": "15.5.0",

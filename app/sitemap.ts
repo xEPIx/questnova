@@ -9,6 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: base, lastModified: new Date() },
     { url: `${base}/games`, lastModified: new Date() },
     { url: `${base}/search`, lastModified: new Date() },
+    { url: `${base}/calculator`, lastModified: new Date() },
   ];
   for (const g of games) {
     urls.push({ url: `${base}/game/${g.slug}`, lastModified: new Date() });
